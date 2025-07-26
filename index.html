@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>稅率反推計算器</h1>
-  <p>請輸入稅後剩餘資源與稅率（%）</p>
+  <p>請輸入稅後剩餘資源與稅率（%），我會幫你反推原本有多少資源。</p>
 
   <input id="after" placeholder="稅後資源，如 1.5m">
   <input id="rate" placeholder="稅率（%），如 30">
@@ -15,18 +15,18 @@
   <p id="result"></p>
 
   <script>
-    const units = { k: 1e3, m: 1e6, b: 1e9, g: 1e9 };
+    const units = { k: 1e3, m: 1e6, b: 1e9 };
 
     function parseAmount(val) {
       val = val.trim().toLowerCase();
-      const match = val.match(/^([\d.]+)\s*([kmbg]?)$/);
+      const match = val.match(/^([\d.]+)\s*([kmb]?)$/);
       if (!match) return NaN;
       let [_, num, unit] = match;
       return parseFloat(num) * (units[unit] || 1);
     }
 
     function formatAmount(n) {
-      if (n >= 1e9) return (n / 1e9).toFixed(2) + 'g';
+      if (n >= 1e9) return (n / 1e9).toFixed(2) + 'b';
       if (n >= 1e6) return (n / 1e6).toFixed(2) + 'm';
       if (n >= 1e3) return (n / 1e3).toFixed(2) + 'k';
       return n.toFixed(0);
